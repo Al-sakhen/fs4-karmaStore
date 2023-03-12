@@ -13,8 +13,12 @@
             <div class="image">
                 <img src="{{ asset('dashboard/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
-            <div class="info">
-                <a href="#" class="d-block">{{ $name }}</a>
+            <div class="info d-flex items-center justify-content-between w-100">
+                <a href="#" class="d-block">{{ auth()->user()->name }}</a>
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button class="btrn btn-danger btn-sm">Logout</button>
+                </form>
             </div>
         </div>
 

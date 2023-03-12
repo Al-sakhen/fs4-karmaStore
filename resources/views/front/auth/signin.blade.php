@@ -28,6 +28,11 @@
             <div class="col-lg-6">
                 <div class="login_form_inner">
                     <h3>Log in to enter</h3>
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <p class="text-danger">{{ $error }}</p>
+                        @endforeach
+                    @endif
                     <form class="row login_form" action="{{ route('login') }}" method="post" id="contactForm"
                         novalidate="novalidate">
                         @csrf

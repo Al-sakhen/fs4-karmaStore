@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ asset('dashboard/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dashboard/dist/css/adminlte.min.css') }}">
+
+    @stack('css')
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -32,7 +34,7 @@
             {{-- breadcrumb --}}
             <div class="content-header">
                 <div class="container-fluid">
-                    <div class="row mb-2">
+                    <div class="mb-2 row">
                         <div class="col-sm-6">
                             <h1 class="m-0">@yield('page_name')</h1>
                         </div><!-- /.col -->
@@ -51,7 +53,9 @@
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
-                    @yield('content')
+                    <div class="row">
+                        @yield('content')
+                    </div>
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -76,6 +80,7 @@
     <script src="{{ asset('dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('dashboard/dist/js/adminlte.min.js') }}"></script>
+    @stack('js')
 </body>
 
 </html>

@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ asset('dashboard/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dashboard/dist/css/adminlte.min.css') }}">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{ asset('dashboard/plugins/toastr/toastr.min.css') }}">
 
     @stack('css')
 </head>
@@ -26,7 +28,7 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        @include('dashboard.layout.partials.sidebar' , ['name' => 'ahmad'])
+        @include('dashboard.layout.partials.sidebar', ['name' => 'ahmad'])
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -41,7 +43,7 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 @section('breadcrumb')
-                                <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Home</a></li>
                                 @show
                             </ol>
                         </div><!-- /.col -->
@@ -73,14 +75,7 @@
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-
-    <!-- jQuery -->
-    <script src="{{ asset('dashboard/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('dashboard/dist/js/adminlte.min.js') }}"></script>
-    @stack('js')
+    @include('dashboard.layout.partials.scripts')
 </body>
 
 </html>

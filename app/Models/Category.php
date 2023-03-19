@@ -11,5 +11,16 @@ class Category extends Model
 
     // fillabel guarded
     protected $guarded = [];
+
+
+    // relations childrens - parent
+
+    public function childrens(){
+        return $this->hasMany(Category::class , 'parent_id' , 'id') ;
+    }
+
+    public function parent(){
+        return $this->belongsTo(Category::class , 'parent_id' , 'id') ;
+    }
 }
 

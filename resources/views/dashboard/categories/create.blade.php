@@ -43,7 +43,6 @@
                         <label for="parent">Parent</label>
                         <select name="parent_id" class="custom-select form-control-border" id="parent">
                             <option value="" selected>Select parent category</option>
-                            <option value="30" selected>test</option>
                             @foreach ($parents as $parent)
                                 <option value="{{ $parent->id }}" @selected(old('parent_id') == $parent->id)>{{ $parent->name }}
                                 </option>

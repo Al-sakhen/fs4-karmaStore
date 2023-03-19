@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('dashboard.categories.index');
+        $categories = Category::whereNull('parent_id')->with('childrens')->get();
+        return view('dashboard.categories.index' , compact('categories'));
     }
 
     /**
@@ -28,27 +30,11 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        // $request->input('name');  //get + post
-        // $request->post('name'); // psot
-        // $request->query('name'); // get
-        // dd($request->except(['_token']), $request->query('name'));
-
-        // $request->only([]);
-        // $request->except([]);
-        // $request->merge();
-        $request->validate([
-            'name' => 'required',
-            'status' => ['boolean' , 'required'],
-            'parent_id' => ['exists:categories,id'],
-        ]);
         $data = $request->except(['_token']);
-
         Category::create($data);
-        // post redirect get (prg)
-
-        return redirect()->back();
+        return redirect()->route('dashboard.categories.index')->with('success' , 'Category created');
     }
 
     /**
@@ -64,15 +50,22 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $parents = Category::whereNull('parent_id')->get();
+        return view('dashboard.categories.edit' , compact('parents' , 'category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CategoryRequest $request, string $id)
     {
-        //
+
+        $data = $request->except(['_token']);
+        $category =  Category::findOrFail($id);
+        $category->update($data);
+
+        return redirect()->route('dashboard.categories.index')->with('success' , 'Category updated');
     }
 
     /**
@@ -80,6 +73,13 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Category::destroy($id);
+        $category =  Category::findOrFail($id);
+        if($category->childrens->count() > 0){
+            return redirect()->back()->with('error' , "Cant't delete category that have childs");
+        }
+
+        $category->delete();
+        return redirect()->back()->with('success' , 'Category deleted');
     }
 }

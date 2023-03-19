@@ -15,7 +15,8 @@
             <div class="card-header">
 
                 <div class="card-tools">
-                    <a href="{{ route('dashboard.categories.create') }}" class="btn btn-sm btn-primary">Create new category</a>
+                    <a href="{{ route('dashboard.categories.create') }}" class="btn btn-sm btn-primary">Create new
+                        category</a>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -23,42 +24,80 @@
                 <table class="table table-hover text-nowrap">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>User</th>
-                            <th>Date</th>
+                            <th>#</th>
+                            <th>Name</th>
                             <th>Status</th>
-                            <th>Reason</th>
+                            <th>Created at</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>183</td>
-                            <td>John Doe</td>
-                            <td>11-7-2014</td>
-                            <td><span class="tag tag-success">Approved</span></td>
-                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        </tr>
-                        <tr>
-                            <td>219</td>
-                            <td>Alexander Pierce</td>
-                            <td>11-7-2014</td>
-                            <td><span class="tag tag-warning">Pending</span></td>
-                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        </tr>
-                        <tr>
-                            <td>657</td>
-                            <td>Bob Doe</td>
-                            <td>11-7-2014</td>
-                            <td><span class="tag tag-primary">Approved</span></td>
-                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        </tr>
-                        <tr>
-                            <td>175</td>
-                            <td>Mike Doe</td>
-                            <td>11-7-2014</td>
-                            <td><span class="tag tag-danger">Denied</span></td>
-                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        </tr>
+                        @forelse ($categories as $category)
+                            {{-- parents --}}
+                            <tr class="bg-secondary">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $category->name }}</td>
+                                <td>
+                                    @if ($category->status == 1)
+                                        ✅
+                                    @else
+                                        ❌
+                                    @endif
+                                </td>
+                                <td>{{ $category->created_at->toDateString() }}</td>
+                                <td class="d-flex">
+
+                                    <form class="mr-2" action="{{ route('dashboard.categories.edit' , $category->id) }}" method="GET">
+                                        @csrf
+                                        <button class="btn btn-sm btn-primary">edit</button>
+                                    </form>
+                                    <form
+                                        action="{{ route('dashboard.categories.destroy', ['category' => $category->id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('delete')
+
+                                        <button class="mr-2 btn btn-sm btn-danger">delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @php
+                                $current_loop = $loop->iteration;
+                            @endphp
+                            {{-- childrens --}}
+                            @if ($category->childrens->count() > 0)
+                                @foreach ($category->childrens as $child)
+                                    <tr>
+                                        <td>{{ $current_loop . '-' . $loop->iteration }}</td>
+                                        <td>{{ $child->name }}</td>
+                                        <td>
+                                            @if ($child->status == 1)
+                                                ✅
+                                            @else
+                                                ❌
+                                            @endif
+                                        </td>
+                                        <td>{{ $child->created_at->toDateString() }}</td>
+                                        <td class="d-flex">
+                                            <a href="{{ route('dashboard.categories.edit' , $child->id) }}" class="mr-2 btn btn-sm btn-primary">edit</a>
+
+                                            <form
+                                                action="{{ route('dashboard.categories.destroy', ['category' => $child->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('delete')
+
+                                                <button class="mr-2 btn btn-sm btn-danger">delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        @empty
+                                <tr>
+                                    <td colspan="5" class="text-center font-weight-bold">No categories found</td>
+                                </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

@@ -51,7 +51,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link {{ request()->routeIs('dashboard.products') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard.products.index') }}" class="nav-link {{ request()->routeIs('dashboard.products.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Products

@@ -13,3 +13,14 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 <script src="{{ asset('front/js/gmaps.min.js') }}"></script>
 <script src="{{ asset('front/js/main.js') }}"></script>
+
+<!-- Toastr -->
+<script src="{{ asset('dashboard/plugins/toastr/toastr.min.js') }}"></script>
+<script>
+    @if (session()->has('success'))
+        toastr.success("{{ session('success') }}")
+    @endif
+    @if (session()->has('error'))
+        toastr.error("{{ session('error') }}")
+    @endif
+</script>

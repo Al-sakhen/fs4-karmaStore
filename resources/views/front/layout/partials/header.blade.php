@@ -33,7 +33,7 @@
                         @endauth
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a>
+                        <li class="nav-item"><a href="{{ route('cart.index') }}" class="cart"><span class="ti-bag"></span></a>
                         </li>
                         <li class="nav-item">
                             <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>

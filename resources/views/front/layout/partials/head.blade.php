@@ -26,3 +26,5 @@ CSS
  <link rel="stylesheet" href="{{ asset('front/css/ion.rangeSlider.skinFlat.css') }}" />
  <link rel="stylesheet" href="{{ asset('front/css/magnific-popup.css') }}">
  <link rel="stylesheet" href="{{ asset('front/css/main.css') }}">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ asset('dashboard/plugins/toastr/toastr.min.css') }}">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Termwind\Components\Dd;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,11 @@ class HomeController extends Controller
         $products = $products->where('status' , true)->paginate(isset($queryParams['select']) ? $queryParams['select'] : 4);
 
         return view('front.category' , compact('categories' , 'products'));
+    }
+
+    public function products($id){
+        $product = Product::findOrFail($id);
+        return view('front.single-product' , compact('product'));
     }
 
     public function signin(){

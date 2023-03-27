@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -23,6 +24,11 @@ use Illuminate\Support\Facades\Route;
 // Home Routes
 Route::get('/', [HomeController::class , 'index'])->name('home');
 Route::get('/category',[HomeController::class , 'category'])->name('category');
+Route::get('/products/{id}' , [HomeController::class , 'products'])->name('products.show');
+// cart routes
+Route::get('/cart' , [CartController::class , 'index'])->name('cart.index');
+Route::post('/cart/add/{id}' , [CartController::class , 'add'])->name('cart.add');
+
 
 Route::get('signin' , [HomeController::class , 'signin'])->name('signin');
 Route::get('signup' , [HomeController::class , 'signup'])->name('signup');

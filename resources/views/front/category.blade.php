@@ -71,13 +71,27 @@
                                         <h6>${{ $product->price }}</h6>
                                         <h6 class="l-through">$210.00</h6>
                                     </div>
-                                    <div class="prd-bottom">
+                                    <div class="prd-bottom d-flex">
+                                        @auth
 
-                                        <a href="" class="social-info">
+                                        <form action="{{ route('cart.add' , $product->id) }}" method="post">
+                                            @csrf
+                                            <button class="border-0 social-info">
+                                                <span class="ti-bag"></span>
+                                                <p class="hover-text">add to bag</p>
+                                            </button>
+                                        </form>
+                                        @endauth
+
+                                        @guest
+                                        <a href="{{ route('signin') }}" class="social-info">
                                             <span class="ti-bag"></span>
                                             <p class="hover-text">add to bag</p>
                                         </a>
-                                        <a href="" class="social-info">
+                                        @endguest
+
+
+                                        <a href="{{ route('products.show' , $product->id) }}" class="social-info">
                                             <span class="lnr lnr-move"></span>
                                             <p class="hover-text">view more</p>
                                         </a>

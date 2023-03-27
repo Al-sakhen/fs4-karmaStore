@@ -75,11 +75,16 @@ class CategoryController extends Controller
     {
         // Category::destroy($id);
         $category =  Category::findOrFail($id);
-        if($category->childrens->count() > 0){
+
+        $childCount = $category->childrens->count();
+        $productsCount  =$category->products->count();
+        if( $childCount > 0){
             return redirect()->back()->with('error' , "Cant't delete category that have childs");
         }
 
-        $category->delete();
+        if( $productsCount > 0){
+            return redirect()->back()->with('error' , "There is ($productsCount) product related to this category, can't delete it !");
+        }
         return redirect()->back()->with('success' , 'Category deleted');
     }
 }

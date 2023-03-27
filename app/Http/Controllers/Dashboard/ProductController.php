@@ -17,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('category')->get(); //eager loading
         return view('dashboard.products.index', compact('products'));
     }
 

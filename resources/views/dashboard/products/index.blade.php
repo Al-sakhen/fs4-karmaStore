@@ -49,7 +49,7 @@
                                         ❌
                                     @endif
                                 </td>
-                                <td>{{ $product->category_id }}</td>
+                                <td>{{ $product->category->name }}</td>
                                 <td>{{ $product->price }} $</td>
                                 <td>{{ $product->quantity }}</td>
                                 <td>

@@ -21,12 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 
 // Home Routes
-Route::get('/', function () {
-    return view('front.index');
-});
-Route::get('/category', function () {
-    return view('front.category');
-})->name('category');
+Route::get('/', [HomeController::class , 'index'])->name('home');
+Route::get('/category',[HomeController::class , 'category'])->name('category');
 
 Route::get('signin' , [HomeController::class , 'signin'])->name('signin');
 Route::get('signup' , [HomeController::class , 'signup'])->name('signup');

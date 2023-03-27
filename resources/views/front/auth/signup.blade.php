@@ -20,7 +20,7 @@
                     <div class="hover">
                         <h4>Already have account?</h4>
 
-                        <a class="primary-btn" href="{{ route('signin') }}}">Sign in</a>
+                        <a class="primary-btn" href="{{ route('signin') }}">Sign in</a>
                     </div>
                 </div>
             </div>

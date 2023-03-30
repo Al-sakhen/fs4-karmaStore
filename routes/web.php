@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Payments\PaypalController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,11 @@ Route::get('signup' , [HomeController::class , 'signup'])->name('signup');
 
 Route::get('checkout/{order}' , [CheckoutController::class , 'index'])->name('checkout');
 Route::post('order/store' , [OrderController::class , 'store'])->name('order.store');
+
+// Paypal routes
+Route::get('paypal/create/{order}' , [PaypalController::class , 'create'])->name('paypal.create');
+Route::get('paypal/cancel/{order}' , [PaypalController::class , 'cancel'])->name('paypal.cancel');
+Route::get('paypal/return/{order}' , [PaypalController::class , 'callback'])->name('paypal.return');
 
 
 

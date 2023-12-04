@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('dashboard/dist/css/adminlte.min.css') }}">
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('dashboard/plugins/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery-confirm.css') }}">
 
     @stack('css')
 </head>

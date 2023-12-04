@@ -47,18 +47,21 @@
                                 <td>{{ $category->created_at->toDateString() }}</td>
                                 <td class="d-flex">
 
-                                    <form class="mr-2" action="{{ route('dashboard.categories.edit' , $category->id) }}" method="GET">
+                                    <form class="mr-2" action="{{ route('dashboard.categories.edit', $category->id) }}"
+                                        method="GET">
                                         @csrf
                                         <button class="btn btn-sm btn-primary">edit</button>
                                     </form>
-                                    <form
-                                        action="{{ route('dashboard.categories.destroy', ['category' => $category->id]) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('delete')
 
-                                        <button class="mr-2 btn btn-sm btn-danger">delete</button>
-                                    </form>
+                                    <div>
+                                        <button class="mr-2 btn btn-sm btn-danger delete-btn">delete</button>
+                                        <form
+                                            action="{{ route('dashboard.categories.destroy', ['category' => $category->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('delete')
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                             @php
@@ -79,24 +82,26 @@
                                         </td>
                                         <td>{{ $child->created_at->toDateString() }}</td>
                                         <td class="d-flex">
-                                            <a href="{{ route('dashboard.categories.edit' , $child->id) }}" class="mr-2 btn btn-sm btn-primary">edit</a>
+                                            <a href="{{ route('dashboard.categories.edit', $child->id) }}"
+                                                class="mr-2 btn btn-sm btn-primary">edit</a>
 
-                                            <form
-                                                action="{{ route('dashboard.categories.destroy', ['category' => $child->id]) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('delete')
-
-                                                <button class="mr-2 btn btn-sm btn-danger">delete</button>
-                                            </form>
+                                            <div>
+                                                <button class="mr-2 btn btn-sm btn-danger delete-btn">delete</button>
+                                                <form
+                                                    action="{{ route('dashboard.categories.destroy', ['category' => $child->id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('delete')
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
                             @endif
                         @empty
-                                <tr>
-                                    <td colspan="5" class="text-center font-weight-bold">No categories found</td>
-                                </tr>
+                            <tr>
+                                <td colspan="5" class="text-center font-weight-bold">No categories found</td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>
